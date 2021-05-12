@@ -42,7 +42,7 @@ cd lite
 
 # Delete the record for Dawson Community Airport
 (cblite) rm airport_10000
-(cblite) cat airport_10000 # This will return the delete tombstone with an empty body
+(cblite) cat airport_10000 # NOTE: This will return the delete tombstone with an empty body
 
 ```
 
