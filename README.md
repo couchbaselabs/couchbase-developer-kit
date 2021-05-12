@@ -27,7 +27,3 @@ Couchbase records are JSON documents.
 #### Sync Gateway
 
 **TODO:** Short CRUD exercise on travel sample database.
-
-#### Couchbase Lite
-
-**TODO:** Short eventing exercise on travel sample database.
