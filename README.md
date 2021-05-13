@@ -51,7 +51,7 @@ cd lite
 # Navigate to the Couchbase Gateway directory
 cd gateway
 
-# Open the Gateway
+# Start the Gateway
 ./couchbase-gateway samples/travel/config.json
 
 # Read the record for San Francisco International airport
