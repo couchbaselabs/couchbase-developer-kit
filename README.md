@@ -42,10 +42,30 @@ cd lite
 
 # Delete the record for Dawson Community Airport
 (cblite) rm airport_10000
-(cblite) cat airport_10000 # NOTE: This will return the delete tombstone with an empty body
-
+(cblite) cat airport_10000
 ```
 
-#### Sync Gateway
+#### Gateway
 
-**TODO:** Short CRUD exercise on travel sample database.
+```shell
+# Navigate to the Couchbase Gateway directory
+cd gateway
+
+# Open the Gateway
+./couchbase-gateway samples/travel/config.json
+
+# Read the record for San Francisco International airport
+curl -X GET http://localhost:4984/travel/airport_3469
+
+# Create a new record for Dawson Community Airport
+curl -X PUT http://localhost:4984/travel/airport_10000 -H "Content-Type: application/json" -d '{"airportname":"Dawson Community Airport"}'
+curl -X GET http://localhost:4984/travel/airport_10000
+
+# Update the record for Dawson Community Airport to include more information
+curl -X PUT http://localhost:4984/travel/airport_10000 -H "Content-Type: application/json" -d '{"_rev":"1-eadd82459b221e07a78c9c75198e9cfb","airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","id":10000,"type":"airport","tz":"America/Denver"}'
+curl -X GET http://localhost:4984/travel/airport_10000
+
+# Delete the record for Dawson Community Airport
+curl -X DELETE http://localhost:4984/travel/airport_10000?rev=2-34f55bdc0de9ebc545f46777612e634c
+curl -X GET http://localhost:4984/travel/airport_10000
+```
