@@ -111,6 +111,8 @@ cd lite
 
 # Open the lite travel sample database
 ./lite samples/travel/db.cblite2
+
+[TODO: Start Listener]
 ```
 
 ### Sync a new record from server to lite
