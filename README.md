@@ -18,7 +18,27 @@ Couchbase records are JSON documents.
 
 #### Couchbase Server
 
-**TODO:** Short CRUD exercise on travel sample database.
+```shell
+cd server
+# Connect to the travel sample database (enter the password when prompted)
+./couchbase-server --password --bucket travel-sample
+
+# Read the record for Ted Stevens Anchorage International Airport (Alaska)
+doc get airline_16726 --flatten
+
+# create a new record Williston Basin International Airport in North Dakota, code XWA
+doc insert airport_3333 {"name":"Williston Basin International Airport" , "callsign":"XWA"}
+doc get airport_3333 --flatten
+
+# update the record created airport_3333 with type as airline
+doc upsert airport_3333 {"name":"Williston Basin International Airport" , "callsign":"XWA" , "type": "airline"}
+doc get airport_3333 --flatten
+
+# delete record airport_3333
+doc remove airport_3333
+doc get airport_3333 --flatten
+
+```
 
 #### Couchbase Lite
 
