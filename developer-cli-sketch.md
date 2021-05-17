@@ -112,7 +112,8 @@ cd lite
 # Open the lite travel sample database
 ./lite samples/travel/db.cblite2
 
-[TODO: Start replication w/ Gateway]
+# Start a replicator with the gateway
+(lite) replicate ws://localhost:4984/travel
 ```
 
 ### Sync a new record from server to lite
