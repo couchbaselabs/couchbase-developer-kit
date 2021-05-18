@@ -20,6 +20,7 @@ Couchbase records are JSON documents.
 
 ```shell
 cd server
+
 # Connect to the travel sample database (enter the password when prompted)
 ./couchbase-server --password --bucket travel-sample
 
@@ -37,7 +38,6 @@ doc get airport_3333 --flatten
 # delete record airport_3333
 doc remove airport_3333
 doc get airport_3333 --flatten
-
 ```
 
 #### Couchbase Lite
