@@ -119,7 +119,7 @@ cd lite
 ./lite samples/travel/db.cblite2
 
 # Start a replicator with the gateway
-(lite) replicate ws://localhost:4984/travel
+(lite) sync ws://localhost:4984/travel
 ```
 
 ### Sync a new record from server to lite
