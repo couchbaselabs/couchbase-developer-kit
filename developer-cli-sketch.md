@@ -1,5 +1,11 @@
 # Developer CLI sketch
 
+## API
+- version
+- cat
+- put
+- rm
+
 ## CRUD
 
 Couchbase records are JSON documents.
