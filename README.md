@@ -113,9 +113,9 @@ cd lite
 # Find the San Francisco International airport record using it's airport code
 (cblite) SELECT * WHERE faa="SFO"
 
-# Find the first 10 airport names in alphabetical order
+# Find the first 10 airports in alphabetical order
 (cblite) SELECT id, airportname WHERE airportname != null ORDER BY airportname ASC LIMIT 10
 
-# Find the id, name, and altitude of the airport at the highest altitude
-(cblite) SELECT id, airportname, alt WHERE alt=max(alt) GROUP BY alt
+# Find the airport at the highest altitude for each country
+(cblite) SELECT country, airportname, max(geo.alt) as alt GROUP BY country
 ```
