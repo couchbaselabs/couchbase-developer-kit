@@ -1,15 +1,3 @@
-### Query
-
-Couchbase supports query using SQL.
-
-#### Couchbase Server
-
-**TODO:** Short query exercise on travel sample database.
-
-#### Couchbase Lite
-
-**TODO:** Short query exercise on travel sample database.
-
 ### Synchronization
 
 **TODO:** Short exercise of synchronizing data between Couchbase Server and Couchbase Lite using Sync Gateway. 1) Sync the travel sample from Couchbase Server to Couchbase Lite. 2) Change a document on the Server and see it show up on Lite. 3) Change a document on Lite and see it show up on Server.
