@@ -115,7 +115,4 @@ cd lite
 
 # Find the first 10 airport names in alphabetical order
 (cblite) SELECT id, airportname WHERE airportname != null ORDER BY airportname ASC LIMIT 10
-
-# Find the second 10 airport names in alphabetical order
-(cblite) SELECT id, airportname WHERE airportname != null ORDER BY airportname ASC LIMIT 10 OFFSET 10
 ```
