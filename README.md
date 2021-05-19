@@ -47,7 +47,7 @@ doc get airport_3333 --flatten
 cd lite
 
 # Open the Couchbase Lite travel sample database
-./couchbase-lite --writeable samples/travel/db.cblite2
+./lite --writeable samples/travel/db.cblite2
 
 # Read the record for San Francisco International airport
 (cblite) cat airport_3469
@@ -72,22 +72,25 @@ cd lite
 cd gateway
 
 # Start the Gateway with the travel sample config
-./couchbase-gateway samples/travel/config.json
+./bin/sync_gateway samples/travel/config.json
+
+# Connect to the Gateway
+./gateway -url http://localhost:4984/travel
 
 # Read the record for San Francisco International airport
-curl -X GET http://localhost:4984/travel/airport_3469
+(gateway) cat airport_3469
 
 # Create a new record for Dawson Community Airport
-curl -X PUT http://localhost:4984/travel/airport_10000 -H "Content-Type: application/json" -d '{"airportname":"Dawson Community Airport"}'
-curl -X GET http://localhost:4984/travel/airport_10000
+(gateway) put airport_10000 '{"airportname":"Dawson Community Airport"}'
+(gateway) cat airport_10000
 
 # Update the record for Dawson Community Airport to include more information
-curl -X PUT http://localhost:4984/travel/airport_10000 -H "Content-Type: application/json" -d '{"_rev":"1-eadd82459b221e07a78c9c75198e9cfb","airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","id":10000,"type":"airport","tz":"America/Denver"}'
-curl -X GET http://localhost:4984/travel/airport_10000
+(gateway) put airport_10000 '{"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}'
+(gateway) cat airport_10000
 
 # Delete the record for Dawson Community Airport
-curl -X DELETE http://localhost:4984/travel/airport_10000?rev=2-34f55bdc0de9ebc545f46777612e634c
-curl -X GET http://localhost:4984/travel/airport_10000
+(gateway) rm airport_10000
+(gateway) cat airport_10000
 ```
 
 ### Query
@@ -105,7 +108,7 @@ Couchbase supports query using SQL.
 cd lite
 
 # Open the Couchbase Lite travel sample database
-./couchbase-lite samples/travel/db.cblite2
+./lite samples/travel/db.cblite2
 
 # Find the San Francisco International airport record using it's airport code
 (cblite) SELECT * WHERE faa="SFO"
