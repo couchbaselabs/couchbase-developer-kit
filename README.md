@@ -100,4 +100,22 @@ Couchbase supports query using SQL.
 
 #### Couchbase Lite
 
-**TODO:** Short query exercise on travel sample database.
+```shell
+# Navigate to the Couchbase Lite directory
+cd lite
+
+# Open the Couchbase Lite travel sample database
+./couchbase-lite samples/travel/db.cblite2
+
+# Find the San Francisco International airport record using it's airport code
+(cblite) SELECT * WHERE faa="SFO"
+
+# Find the id, name, and altitude of the airport at the highest altitude
+(cblite) SELECT id, airportname, alt WHERE alt=max(alt) GROUP BY alt
+
+# Find the first 10 airport names in alphabetical order
+(cblite) SELECT id, airportname WHERE airportname != null ORDER BY airportname ASC LIMIT 10
+
+# Find the second 10 airport names in alphabetical order
+(cblite) SELECT id, airportname WHERE airportname != null ORDER BY airportname ASC LIMIT 10 OFFSET 10
+```
