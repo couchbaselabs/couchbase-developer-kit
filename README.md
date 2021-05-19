@@ -89,3 +89,15 @@ curl -X GET http://localhost:4984/travel/airport_10000
 curl -X DELETE http://localhost:4984/travel/airport_10000?rev=2-34f55bdc0de9ebc545f46777612e634c
 curl -X GET http://localhost:4984/travel/airport_10000
 ```
+
+### Query
+
+Couchbase supports query using SQL.
+
+#### Couchbase Server
+
+**TODO:** Short query exercise on travel sample database.
+
+#### Couchbase Lite
+
+**TODO:** Short query exercise on travel sample database.
