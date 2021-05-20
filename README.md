@@ -100,7 +100,24 @@ Couchbase supports query using SQL.
 
 #### Server
 
-**TODO:** Short query exercise on travel sample database.
+```shell
+
+# Navigate to the server directory
+cd server
+
+# Connect to the travel sample database (enter the password when prompted)
+./couchbase-server --password --bucket travel-sample
+
+# Find first 5 airports in France 
+query "SELECT `travel-sample`.* from `travel-sample` WHERE `type`='airport' and `country`='France' LIMIT 5"
+
+# select the longest flight and the two airports it connects
+query "SELECT sourceairport, destinationairport, ROUND(distance) AS DistanceInMiles FROM `travel-sample` WHERE type='route' ORDER BY distance DESC LIMIT 1"
+
+# Find the first airline alphabetically in travel-sample
+query "SELECT MIN(name) AS Name FROM `travel-sample` WHERE type='airline' AND SUBSTR(name,0)>='A'"
+
+```
 
 #### Lite
 
