@@ -4,7 +4,7 @@ Couchbase is a NoSQL database platform. It has three main developer components:
 
 * Couchbase Server – A distributed database server
 * Couchbase Lite – An embedded database
-* Sync Gateway – An Internet gateway
+* Couchbase Gateway – An Internet gateway for reading, writing, and synchronizing data over the web
 
 ## Try Couchbase for the First Time
 
