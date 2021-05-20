@@ -19,6 +19,7 @@ Couchbase records are JSON documents.
 #### Couchbase Server
 
 ```shell
+# Navigate to the Couchbase Server directory
 cd server
 
 # Connect to the travel sample database (enter the password when prompted)
