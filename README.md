@@ -16,10 +16,10 @@ Couchbase is a NoSQL database platform. It has three main developer components:
 
 Couchbase records are JSON documents.
 
-#### Couchbase Server
+#### Server
 
 ```shell
-# Navigate to the Couchbase Server directory
+# Navigate to the server directory
 cd server
 
 # Connect to the travel sample database (enter the password when prompted)
@@ -41,13 +41,13 @@ doc remove airport_3333
 doc get airport_3333 --flatten
 ```
 
-#### Couchbase Lite
+#### Lite
 
 ```shell
-# Navigate to the Couchbase Lite directory
+# Navigate to the lite directory
 cd lite
 
-# Open the Couchbase Lite travel sample database
+# Open the travel sample database
 ./lite --writeable samples/travel/db.cblite2
 
 # Read the record for San Francisco International airport
@@ -69,13 +69,13 @@ cd lite
 #### Gateway
 
 ```shell
-# Navigate to the Couchbase Gateway directory
+# Navigate to the gateway directory
 cd gateway
 
-# Start the Gateway with the travel sample config
+# Start the gateway with the travel sample config
 ./bin/sync_gateway samples/travel/config.json
 
-# Connect to the Gateway
+# Connect to the gateway
 ./gateway -url http://localhost:4984/travel
 
 # Read the record for San Francisco International airport
@@ -98,17 +98,17 @@ cd gateway
 
 Couchbase supports query using SQL.
 
-#### Couchbase Server
+#### Server
 
 **TODO:** Short query exercise on travel sample database.
 
-#### Couchbase Lite
+#### Lite
 
 ```shell
-# Navigate to the Couchbase Lite directory
+# Navigate to the lite directory
 cd lite
 
-# Open the Couchbase Lite travel sample database
+# Open the travel sample database
 ./lite samples/travel/db.cblite2
 
 # Find the San Francisco International airport record using it's airport code
