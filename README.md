@@ -108,14 +108,14 @@ cd server
 # Connect to the travel sample database (enter the password when prompted)
 ./couchbase-server --password --bucket travel-sample
 
-# Find first 5 airports in France 
-query "SELECT `travel-sample`.* from `travel-sample` WHERE `type`='airport' and `country`='France' LIMIT 5"
+# Find the San Francisco International airport record using it's airport code
+query "SELECT `travel-sample`.* from `travel-sample` WHERE faa='SFO'"
 
-# select the longest flight and the two airports it connects
-query "SELECT sourceairport, destinationairport, ROUND(distance) AS DistanceInMiles FROM `travel-sample` WHERE type='route' ORDER BY distance DESC LIMIT 1"
+# Find the first 10 airports in alphabetical order
+query "SELECT id, airportname from `travel-sample` WHERE airportname is not null order by airportname LIMIT 10"
 
-# Find the first airline alphabetically in travel-sample
-query "SELECT MIN(name) AS Name FROM `travel-sample` WHERE type='airline' AND SUBSTR(name,0)>='A'"
+#  Find the airport at the highest altitude for each country
+query "SELECT country, airportname, MAX(geo.alt) as alt  FROM `travel-sample` group by country, airportname"
 
 ```
 
