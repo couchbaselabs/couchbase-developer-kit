@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# ./server couchbase://localhost/travel-sample -u Administrator -p password
+# ./server couchbase://localhost/travel-sample -u admin -p password
 
 # Get all the other args
 positionalArgs=()
