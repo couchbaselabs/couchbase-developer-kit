@@ -29,11 +29,11 @@ cd server
 (server) get airport_3469
 
 # Create a new record for Dawson Community Airport
-(server) put airport_10000 '{"airportname":"Dawson Community Airport"}'
+(server) put airport_10000 {"airportname":"Dawson Community Airport"}
 (server) get airport_10000
 
 # Update the record for Dawson Community Airport to include more information
-(server) put airport_10000 '{"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}'
+(server) put airport_10000 {"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}
 (server) get airport_10000
 
 # Delete the record for Dawson Community Airport
