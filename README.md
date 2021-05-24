@@ -113,8 +113,8 @@ cd server
 # Find the first 10 airports in alphabetical order
 (server) SELECT id, airportname FROM `travel-sample` WHERE airportname IS NOT NULL ORDER BY airportname LIMIT 10
 
-#Find the airport at the highest altitude for each country
-(server) SELECT country, max(geo.alt) AS alt  FROM `travel-sample` group by country 
+# Find the altitude of the highest airport in each country
+(server) SELECT country, max(geo.alt) AS alt  FROM `travel-sample` group by country
 ```
 
 #### Lite
@@ -132,6 +132,6 @@ cd lite
 # Find the first 10 airports in alphabetical order
 (cblite) SELECT id, airportname WHERE airportname IS NOT NULL ORDER BY airportname LIMIT 10
 
-# Find the airport at the highest altitude for each country
-(cblite) SELECT country, airportname, max(geo.alt) AS alt GROUP BY country
+# Find the altitude of the highest airport in each country
+(cblite) SELECT country, max(geo.alt) AS alt GROUP BY country
 ```
