@@ -58,7 +58,7 @@ cd lite
 (cblite) get airport_10000
 
 # Update the record for Dawson Community Airport to include more information
-(cblite) put airport_10000 '{"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}'
+(cblite) put airport_10000 {"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}
 (cblite) get airport_10000
 
 # Delete the record for Dawson Community Airport
