@@ -23,7 +23,7 @@ Couchbase records are JSON documents.
 cd server
 
 # Connect to the travel sample database 
-./server couchbase://localhost/travel-sample -u Administrator -p password
+./server couchbase://localhost/travel-sample -u admin -p password
 
 # Read the record for San Francisco International airport
 (server) get airport_3469
@@ -105,7 +105,7 @@ Couchbase supports query using SQL.
 cd server
 
 # Connect to the travel sample database 
-./server couchbase://localhost/travel-sample -u Administrator -p password
+./server couchbase://localhost/travel-sample -u admin -p password
 
 # Find the San Francisco International airport record using it's airport code
 (server) SELECT * FROM `travel-sample` WHERE faa='SFO'
