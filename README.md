@@ -22,23 +22,23 @@ Couchbase records are JSON documents.
 # Navigate to the server directory
 cd server
 
-# Connect to the travel sample database (enter the password when prompted)
-./couchbase-server --password --bucket travel-sample
+# Connect to the travel sample database 
+./server couchbase://localhost/travel-sample -u Administrator -p password
 
-# Read the record for Ted Stevens Anchorage International Airport (Alaska)
-doc get airline_16726 --flatten
+# Read the record for San Francisco International airport
+(server) get airport_3469
 
-# create a new record Williston Basin International Airport in North Dakota, code XWA
-doc insert airport_3333 {"name":"Williston Basin International Airport" , "callsign":"XWA"}
-doc get airport_3333 --flatten
+# Create a new record for Dawson Community Airport
+(server) put airport_10000 '{"airportname":"Dawson Community Airport"}'
+(server) get airport_10000
 
-# update the record created airport_3333 with type as airline
-doc upsert airport_3333 {"name":"Williston Basin International Airport" , "callsign":"XWA" , "type": "airline"}
-doc get airport_3333 --flatten
+# Update the record for Dawson Community Airport to include more information
+(server) put airport_10000 '{"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}'
+(server) get airport_10000
 
-# delete record airport_3333
-doc remove airport_3333
-doc get airport_3333 --flatten
+# Delete the record for Dawson Community Airport
+(server) rm airport_10000
+(server) get airport_10000
 ```
 
 #### Lite
@@ -55,15 +55,15 @@ cd lite
 
 # Create a new record for Dawson Community Airport
 (cblite) put airport_10000 '{"airportname":"Dawson Community Airport"}'
-(cblite) cat airport_10000
+(cblite) get airport_10000
 
 # Update the record for Dawson Community Airport to include more information
 (cblite) put airport_10000 '{"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}'
-(cblite) cat airport_10000
+(cblite) get airport_10000
 
 # Delete the record for Dawson Community Airport
 (cblite) rm airport_10000
-(cblite) cat airport_10000
+(cblite) get airport_10000
 ```
 
 #### Gateway

@@ -1,0 +1,121 @@
+#! /bin/bash
+
+# ./server couchbase://localhost/travel-sample -u Administrator -p password
+
+# Get all the other args
+positionalArgs=()
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+
+    case $key in
+        -u)
+            user="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -p)
+            password="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        *)    # unknown option
+            positionalArgs+=("$1") # save it in an array for later
+            shift # past argument
+            ;;
+    esac
+done
+set -- "${positionalArgs[@]}" # restore positional parameters
+
+# Get url from 1st positional arg
+url=$1
+
+# TODO: If a URL to an existing instance of Server is not specified then
+# start a new instance of Server and configure it.
+
+# Path to cbc
+cbc=bin/couchbase-server.app/Contents/Resources/couchbase-core/bin/cbc
+
+# get airport_3469
+# get airport_10000
+get() {
+    key=$1
+
+    $cbc cat $key -U $url -u $user -P $password
+}
+
+# put airport_10000 {'airportname':'Dawson Community Airport'}
+put() {
+    key=$(cut -d " " -f1 <<< $1)
+    value=$(cut -d " " -f2- <<< $1)
+    
+    $cbc create "$key" -V "$value"  -U $url -u $user -P $password
+}
+
+# rm airport_10000
+rm() {
+    key=$1
+
+    $cbc rm $key -U $url -u $user -P $password
+}
+
+# SELECT * FROM \`travel-sample\` WHERE faa='SFO'
+query() {
+    query=$1
+
+    $cbc query "$query" -U $url -u $user -P $password
+}
+
+until [ $quit ]; do
+    read -p "(server) " in
+
+    command=$(cut -d " " -f1 <<< $in)
+    args=$(cut -d " " -f2- <<< $in)
+
+    if [[ $command == "get" ]]; then
+        get "$args"
+    elif [[ $command == "put" ]]; then
+        put "$args"
+    elif [[ $command == "rm" ]]; then
+        rm "$args"
+    elif [[ $command == "select" || $command == "SELECT" ]]; then
+        query "$in"
+    elif [[ $command == "quit" ]]; then
+        quit=1
+    else
+        echo "Error: Not a valid command name: $command"
+    fi
+done
+
+# (cd bin/couchbase-server.app/Contents/Resources ; ./start-server.sh )
+
+#(cd ./bin ; ./start-server )
+
+# TODO: Start server
+# TODO: Wait for cluster to start
+# TODO: If travel-sample isn't installed, install it
+
+# TODO: Wait for stdin
+# TODO: Execute get, put, rm, query
+# TODO: Loop
+
+# Configure the cluster
+# https://docs.couchbase.com/server/current/cli/cbcli/couchbase-cli-cluster-init.html
+
+# Check for Travel Sample
+# ./cbc ping -U couchbase://localhost/travel-sample -u Administrator -P password
+
+# Install Travel Sample
+# curl -X POST -u Administrator:password http://localhost:8091/sampleBuckets/install -d '["travel-sample"]'
+
+# Get
+# ./cbc cat airport_3469 -U couchbase://localhost/travel-sample -u Administrator -P password
+
+# Put
+# ./cbc create airport_10000 -V '{"airportname":"Dawson Community Airport"}' -U couchbase://localhost/travel-sample -u Administrator -P password
+
+# Delete
+# ./cbc rm airport_10000 -U couchbase://localhost/travel-sample -u Administrator -P password
+
+# Query
+# ./cbc query "SELECT * FROM \`travel-sample\` WHERE faa='SFO'" -U couchbase://localhost/travel-sample -u Administrator -P password
