@@ -108,13 +108,13 @@ cd server
 ./server couchbase://localhost/travel-sample -u Administrator -p password
 
 # Find the San Francisco International airport record using it's airport code
-(server) SELECT * from `travel-sample` WHERE faa='SFO'
+(server) SELECT * FROM `travel-sample` WHERE faa='SFO'
 
 # Find the first 10 airports in alphabetical order
-(server) SELECT id, airportname from `travel-sample` WHERE airportname is not null order by airportname LIMIT 10
+(server) SELECT id, airportname FROM `travel-sample` WHERE airportname IS NOT NULL ORDER BY airportname LIMIT 10
 
 #Find the airport at the highest altitude for each country
-(server) SELECT country, MAX(geo.alt) as alt  FROM `travel-sample` group by country 
+(server) SELECT country, max(geo.alt) AS alt  FROM `travel-sample` group by country 
 ```
 
 #### Lite
@@ -130,8 +130,8 @@ cd lite
 (cblite) SELECT * WHERE faa="SFO"
 
 # Find the first 10 airports in alphabetical order
-(cblite) SELECT id, airportname WHERE airportname != null ORDER BY airportname ASC LIMIT 10
+(cblite) SELECT id, airportname WHERE airportname IS NOT NULL ORDER BY airportname LIMIT 10
 
 # Find the airport at the highest altitude for each country
-(cblite) SELECT country, airportname, max(geo.alt) as alt GROUP BY country
+(cblite) SELECT country, airportname, max(geo.alt) AS alt GROUP BY country
 ```
