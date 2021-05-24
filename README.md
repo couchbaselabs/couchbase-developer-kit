@@ -51,7 +51,7 @@ cd lite
 ./lite --writeable samples/travel/db.cblite2
 
 # Read the record for San Francisco International airport
-(cblite) cat airport_3469
+(cblite) get airport_3469
 
 # Create a new record for Dawson Community Airport
 (cblite) put airport_10000 '{"airportname":"Dawson Community Airport"}'
