@@ -108,7 +108,7 @@ cd server
 ./server couchbase://localhost/travel-sample -u Administrator -p password
 
 # Find the San Francisco International airport record using it's airport code
-(server) SELECT `travel-sample`.* from `travel-sample` WHERE faa='SFO'
+(server) SELECT * from `travel-sample` WHERE faa='SFO'
 
 # Find the first 10 airports in alphabetical order
 (server) SELECT id, airportname from `travel-sample` WHERE airportname is not null order by airportname LIMIT 10
