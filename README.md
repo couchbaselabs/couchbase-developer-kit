@@ -127,7 +127,7 @@ cd lite
 ./lite samples/travel/db.cblite2
 
 # Find the San Francisco International airport record using it's airport code
-(cblite) SELECT * WHERE faa="SFO"
+(cblite) SELECT * WHERE faa='SFO'
 
 # Find the first 10 airports in alphabetical order
 (cblite) SELECT id, airportname WHERE airportname IS NOT NULL ORDER BY airportname LIMIT 10
