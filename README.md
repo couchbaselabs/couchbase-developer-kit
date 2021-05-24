@@ -54,7 +54,7 @@ cd lite
 (cblite) get airport_3469
 
 # Create a new record for Dawson Community Airport
-(cblite) put airport_10000 '{"airportname":"Dawson Community Airport"}'
+(cblite) put airport_10000 {"airportname":"Dawson Community Airport"}
 (cblite) get airport_10000
 
 # Update the record for Dawson Community Airport to include more information
