@@ -114,7 +114,7 @@ cd server
 (server) SELECT id, airportname FROM `travel-sample` WHERE airportname IS NOT NULL ORDER BY airportname LIMIT 10
 
 # Find the altitude of the highest airport in each country
-(server) SELECT country, max(geo.alt) AS alt  FROM `travel-sample` group by country
+(server) SELECT country, max(geo.alt) AS alt FROM `travel-sample` group by country
 ```
 
 #### Lite
