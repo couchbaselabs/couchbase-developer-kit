@@ -140,6 +140,7 @@ cd lite
 
 ```shell
 # Setup
+
 # Navigate to the server directory
 cd server
 # Connect to the travel sample database
@@ -163,15 +164,15 @@ cd lite
 # Start the bidirectional replication continuously
 (cblite) cp --bidi —continuous ws://localhost:4984/travel
 
-# Get to the terminal connected to the server. Create a new document
+# Get to the terminal connected to the server, create a new document
 (server) put airport_10001 '{"airportname":"Arcata-Eureka Airport"}'
 
-## Getting back to the Lite terminal, see that the new record for Arcata-Eureka Airport is synchronized from the server.
+## Getting back to the Lite terminal, see that the new record for Arcata-Eureka Airport is synchronized from the server
 (cblite) cat airport_10001
 
 # Lets sync from Lite to server 
 
-# Go to the terminal connected to Lite and update the record for Arcata-Eureka Airport to include more information.
+# Go to the terminal connected to Lite and update the record for Arcata-Eureka Airport to include more information
 (cblite) put airport_10001 '{"airportname":"Arcata-Eureka Airport","city":"Humboldt County, California","country":"United States","faa":"ACV","geo":{"alt":222,"lat":40.977778,"lon":-124.108333},"icao":"KACV","type":"airport","tz":"America/Los_Angeles"}'
 
 # back in the server terminal, see that the new information for Arcata-Eureka Airport synchronized from lite.
