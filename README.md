@@ -8,13 +8,13 @@ Couchbase is a NoSQL database platform. It has three main developer components:
 
 ## Try Couchbase for the First Time
 
-### Setup
-
-**TODO:** Setups steps
-
 ### CRUD
 
 Couchbase records are JSON documents.
+
+#### Setup
+
+**TODO:** Setup steps
 
 #### Server
 
@@ -136,54 +136,87 @@ cd lite
 (cblite) SELECT country, max(geo.alt) AS alt GROUP BY country
 ```
 
-### Sync a new record from Server to Lite and vice versa
+### Sync
+
+#### Setup
+
+Connect to the server travel sample database.
 
 ```shell
-# Setup
-
 # Navigate to the server directory
 cd server
-# Connect to the travel sample database
-./server couchbase://localhost/travel-sample -u admin -p password
 
-# On another terminal, navigate to the gateway directory
+# Connect to the travel sample database 
+./server couchbase://localhost/travel-sample -u admin -p password
+```
+
+Start the gateway with the travel sample config.
+
+```shell
+# Navigate to the gateway directory
 cd gateway
 
 # Start the gateway with the travel sample config
 ./bin/sync_gateway samples/travel/config.json
+```
 
-# Connect to the gateway
-./gateway -url http://localhost:4984/travel
+Open the lite travel sample database.
 
-# On a third terminal navigate to the lite directory
+```shell
+# Navigate to the lite directory
 cd lite
 
-# Open the travel sample database in an interactive mode
+# Open the travel sample database
 ./lite --writeable samples/travel/db.cblite2
 
-# Start the continuous bidirectional replication
-(cblite) cp --bidi —continuous ws://localhost:4984/travel
+# Start sync with the gateway
+(cblite) cp --bidi --continuous ws://localhost:4984/travel
+```
 
-# First, let us sync from Server to Lite 
-# Get to the terminal connected to the server, create a new document
-(server) put airport_10001 '{"airportname":"Arcata-Eureka Airport"}'
+#### Sync a new record from server to lite
 
-## Getting back to the Lite terminal, see that the new record for Arcata-Eureka Airport is synchronized from the server
-(cblite) cat airport_10001
+In lite, look for Dawson Community Airport – it doesn't exist.
 
-# Now, let us sync from Lite to server 
+```shell
+(cblite) get airport_10000
+```
 
-# Go to the terminal connected to Lite and update the record for Arcata-Eureka Airport to include more information
-(cblite) put airport_10001 {"airportname":"Arcata-Eureka Airport","city":"Humboldt County, California","country":"United States","faa":"ACV","geo":{"alt":222,"lat":40.977778,"lon":-124.108333},"icao":"KACV","type":"airport","tz":"America/Los_Angeles"}
+In server, create a new record for Dawson Community Airport.
 
-# back in the server terminal, see that the new information for Arcata-Eureka Airport synchronized from lite.
-(server) cat airport_10001
+```shell
+(server) put airport_10000 {"airportname":"Dawson Community Airport"}
+```
 
-# Finally, lets sync a record delete between Server and Lite
-# On server delete the record for Arcata-Eureka Airport.
-(server) rm airport_10001
+In lite, see that the new record for Dawson Community Airport synchronized from server.
 
-# Back in the Lite terminal verify that the deletion of Arcata-Eureka Airport synchronized from server.
-(cblite) cat airport_10001
+```shell
+(cblite) get airport_10000
+```
 
+#### Sync a record update from lite to server
+
+In lite, update the record for Dawson Community Airport to include more information.
+
+```shell
+(cblite) put airport_10000 {"airportname":"Dawson Community Airport","city":"Glendive","country":"United States","faa":"GDV","geo":{"alt":2456,"lat":47.133071760160384,"lon":-104.8024315730339},"icao":"KGDV","type":"airport","tz":"America/Denver"}
+```
+
+In server, see that the new information for Dawson Community Airport synchronized from lite.
+
+```shell
+(server) get airport_10000
+```
+
+#### Sync a record delete
+
+In server, delete the record for Dawson Community Airport.
+
+```shell
+(server) rm airport_10000
+```
+
+In lite, see that the deletion of Dawson Community Airport synchronized from server.
+
+```shell
+(cblite) get airport_10000
 ```
