@@ -135,3 +135,55 @@ cd lite
 # Find the altitude of the highest airport in each country
 (cblite) SELECT country, max(geo.alt) AS alt GROUP BY country
 ```
+
+### Sync a new record from Server to Lite and vice versa
+
+```shell
+# Setup
+
+# Navigate to the server directory
+cd server
+# Connect to the travel sample database
+./server couchbase://localhost/travel-sample -u admin -p password
+
+# On another terminal, navigate to the gateway directory
+cd gateway
+
+# Start the gateway with the travel sample config
+./bin/sync_gateway samples/travel/config.json
+
+# Connect to the gateway
+./gateway -url http://localhost:4984/travel
+
+# On a third terminal navigate to the lite directory
+cd lite
+
+# Open the travel sample database in an interactive mode
+./lite --writeable samples/travel/db.cblite2
+
+# Start the continuous bidirectional replication
+(cblite) cp --bidi —continuous ws://localhost:4984/travel
+
+# First, let us sync from Server to Lite 
+# Get to the terminal connected to the server, create a new document
+(server) put airport_10001 '{"airportname":"Arcata-Eureka Airport"}'
+
+## Getting back to the Lite terminal, see that the new record for Arcata-Eureka Airport is synchronized from the server
+(cblite) cat airport_10001
+
+# Now, let us sync from Lite to server 
+
+# Go to the terminal connected to Lite and update the record for Arcata-Eureka Airport to include more information
+(cblite) put airport_10001 {"airportname":"Arcata-Eureka Airport","city":"Humboldt County, California","country":"United States","faa":"ACV","geo":{"alt":222,"lat":40.977778,"lon":-124.108333},"icao":"KACV","type":"airport","tz":"America/Los_Angeles"}
+
+# back in the server terminal, see that the new information for Arcata-Eureka Airport synchronized from lite.
+(server) cat airport_10001
+
+# Finally, lets sync a record delete between Server and Lite
+# On server delete the record for Arcata-Eureka Airport.
+(server) rm airport_10001
+
+# Back in the Lite terminal verify that the deletion of Arcata-Eureka Airport synchronized from server.
+(cblite) cat airport_10001
+
+```
