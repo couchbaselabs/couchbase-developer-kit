@@ -96,7 +96,7 @@ cd gateway
 
 ### Query
 
-Couchbase supports query using SQL.
+Couchbase queries are SQL.
 
 #### Server
 
