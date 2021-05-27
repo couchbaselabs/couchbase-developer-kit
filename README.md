@@ -1,6 +1,6 @@
 # Couchbase Developer Kit
 
-Couchbase is a NoSQL database platform. It has three main developer components:
+Couchbase is a database platform. It has three main developer components:
 
 * Server – A distributed database server
 * Lite – An embedded database
